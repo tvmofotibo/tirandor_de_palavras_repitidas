@@ -2,8 +2,20 @@ var arraysemnada=[]
 copiar=""
 var ffsa=""
 musico=0
-audio=new Audio("./audio.mp3")
+var audio = new Audio("./audio.mp3");
+tempo=0
+
 audio.play()
+var tempoini=1
+  setInterval(function(){
+    if(tempoini == 1 ){
+      tempo++
+    }
+    if(tempo>=170){
+      tempo=0
+      audio.play()
+    }
+  },1000)
 function vibrar(){
   window.navigator.vibrate(100)
 }
@@ -75,11 +87,15 @@ function music(){
   vibrar()
   if(musico==1){
     musico=0
+    tempoini=1
     document.getElementById("music").innerText="Music Pause"
     audio.play()
+    alert("play")
   }else{
     musico=1
     document.getElementById("music").innerText="Music Play"
     audio.pause()
+    tempoini=0
+    alert("pause")
   }
 }
