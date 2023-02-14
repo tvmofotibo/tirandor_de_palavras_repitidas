@@ -5,11 +5,12 @@ musico=0
 var audio = new Audio("./audio.mp3");
 tempo=0
 
-audio.play()
-var tempoini=1
+audio.pause()
+var tempoini=0
   setInterval(function(){
     if(tempoini == 1 ){
       tempo++
+      console.log("segundos: "+tempo)
     }
     if(tempo>=170){
       tempo=0
@@ -87,15 +88,33 @@ function music(){
   vibrar()
   if(musico==1){
     musico=0
-    tempoini=1
-    document.getElementById("music").innerText="Music Pause"
-    audio.play()
-    alert("play")
-  }else{
-    musico=1
+    tempoini=0
     document.getElementById("music").innerText="Music Play"
     audio.pause()
-    tempoini=0
-    alert("pause")
+  }else{
+    musico=1
+    document.getElementById("music").innerText="Music Pause"
+    audio.play()
+    tempoini=1
   }
+}
+function downloadFile(text) {
+  // Cria um elemento <a> para download
+  const downloadLink = document.createElement("a");
+
+  // Define o conteúdo do arquivo
+  const fileContent = encodeURIComponent(text);
+
+  // Define o nome do arquivo
+  const fileName = "meu-arquivo.txt";
+
+  // Define a URL do arquivo
+  downloadLink.setAttribute("href", `data:text/plain;charset=utf-8,${fileContent}`);
+
+
+  // Define o nome do arquivo para download
+  downloadLink.setAttribute("download", fileName);
+
+  // Clica no link para iniciar o download
+  downloadLink.click();
 }
