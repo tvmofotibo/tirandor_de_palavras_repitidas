@@ -2,21 +2,16 @@ var arraysemnada=[]
 copiar=""
 var ffsa=""
 musico=0
+var audiomr=false
 var audio = new Audio("./audio.mp3");
 tempo=0
 
-audio.pause()
-var tempoini=0
-  setInterval(function(){
-    if(tempoini == 1 ){
-      tempo++
-      console.log("segundos: "+tempo)
-    }
-    if(tempo>=170){
-      tempo=0
-      audio.play()
-    }
-  },1000)
+setInterval(function (){
+  if(audio.currentTime>=audio.duration){
+    audio.play()
+  }
+},1000)
+
 function vibrar(){
   window.navigator.vibrate(100)
 }
@@ -56,9 +51,11 @@ function encodeMessage(message) {
         vibrar()
         setTimeout(function(){
           var number = prompt("Por favor, digite o número de telefone do destinatário:");
+        if(number==true){
         var message = ffsa
         var encodedMessage = encodeMessage(message);
         window.open("https://wa.me/" + number + "?text=" + encodedMessage);
+        }else{alert("ok")}
         },500)
         
       }
@@ -88,17 +85,24 @@ function music(){
   vibrar()
   if(musico==1){
     musico=0
-    tempoini=0
     document.getElementById("music").innerText="Music Play"
     audio.pause()
-  }else{
-    musico=1
-    document.getElementById("music").innerText="Music Pause"
-    audio.play()
-    tempoini=1
+    audiomr=false
+    }else if(musico==0){
+        musico=1
+        document.getElementById("music").innerText="Music Pause"
+          audio.play()
+          audiomr=true
+    }
+ }
+function audioplayiframe(ii){
+  vibrar()
+  if(audiomr){
+     audio.play()
   }
 }
 function downloadFile(text) {
+  vibrar()
   // Cria um elemento <a> para download
   const downloadLink = document.createElement("a");
 

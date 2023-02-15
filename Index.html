@@ -10,12 +10,26 @@
 </head>
 <body>
   <script src="script.js"></script>
+  <script>
+    function processFile() {
+      const input = document.getElementById("fileInput")
+      const file = input.files[0]
+
+      const reader = new FileReader()
+      reader.onload = function() {
+        var text = reader.result
+        document.getElementById("texto").value=text
+      }
+      reader.readAsText(file)
+    }
+  </script>
 	<section>
 	  <br>
 	  <div>
 	    <h4>tirador de palavras replitidas</h1>
 	  </div>
 	<div id="input-user">
+	   <input type="file" id="fileInput" class="bonito" onchange="processFile()" onclick="vibrar()"/>
 	  <p>seu texto: <input id="texto" class="bonito" type="text" onclick="vibrar()"></input></p>
 	  <button class="bonito" onclick="rodarscript()" id="ir" >ir</button>
 	  </div>
@@ -28,11 +42,15 @@
 	  <button class="bonito" onclick="mostratexto_or_alertar(1)">mostra texto</button>
 	  <button class="bonito" onclick="mostratexto_or_alertar(2)">alertar texto</button>
     <button onclick="sendWhatsAppMessage()" class="bonito">Enviar texto final via WhatsApp</button>
+    <div id="downtxt">
+        <button class="bonito" onclick="downloadFile(ffsa)
+">baixa arquivo txt</button>
+    </div>
 	  <hr>
 	  <div id="texto-tira"></div>
 	  <br>
 	  <hr>
-	  <button onclick="music()" id="music" class="bonito">Music Pause</button>
+	  <button onclick="music()" id="music" class="bonito">Music Play</button>
 	  <div id="creditos">
 	<p><strong>créditos:</strong></p>
 	<p><strong>feito por: <strong style="color:blue;">Colapsus Group</strong></strong><br> <p><strong>desenvolvedor:</strong><strong style="color:blue;">Alvino Gabriel Santana Santos</strong></p></p>
@@ -44,6 +62,43 @@
 </svg>
 <p>GitHub</p>
 </div>
+
+  <!--codigo a baixo feito pelo chat gpt3-->
+  <button id="open-popup" class="bonito" onclick="audio.pause(); vibrar()">Atualização?</button>
+
+<div class="popup-container">
+  <div class="popup">
+    <h2>O que há de novo na atualização?</h2>
+    <p><li/>Adcionamos a função para download em txt <br/> <li/>Adcionamos a função de pop-up(obs:<strong>O pop-up foi feito pela: </strong><a href="www.chat.openai.com">chat.openai.com</a>)<li/>Deixamos o site mais rapido <br/> <li/>Adcionamos a função para download do arquivo <br/> <li/>Adcionamos o input via arquivo</p>
+    <div id="ifframe"></div>
+    <button id="close-popup" class="bonito" onclick="audioplayiframe(1)">Close</button>
+  </div>
+</div>
+ <script>
+  const openPopupButton = document.getElementById('open-popup');
+const closePopupButton = document.getElementById('close-popup');
+const popupContainer = document.querySelector('.popup-container');
+
+openPopupButton.addEventListener('click', () => {
+  i=document.createElement("iframe")
+  i.src="https://www.youtube.com/embed/-GIN2W5nKT4?autoplay=1"
+  i.width="280"
+  i.height="380"
+  i.frameborder="0"
+  i.allow="autoplay; encrypted-media"
+  i.allowfullscreen
+  document.getElementById("ifframe").appendChild(i)
+  popupContainer.style.display = 'block';
+});
+
+closePopupButton.addEventListener('click', () => {
+  document.getElementById("ifframe").removeChild(i)
+  popupContainer.style.display = 'none';
+});
+
+  </script>
+    <!--codigo a cima feito pelo chat gpt3-->
+
 	</div>
 	</div>
 	</section>
